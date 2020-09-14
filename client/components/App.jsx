@@ -1,5 +1,8 @@
 import React from 'react'
-import AddTodo from './AddTodo'
+import Header from './Header'
+// import AddTodo from './AddTodo'
+import TaskList from './TaskList'
+import Footer from './Footer'
 
 class App extends React.Component {
   componentDidMount() {
@@ -8,12 +11,9 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <header className="header">
-          <h1>todos</h1>
-          <AddTodo/>
-        </header>
-        <section className="main"></section>
-        <footer className="footer"></footer>
+        <Header />
+        <TaskList />
+        <Footer />
       </>
     )
   }

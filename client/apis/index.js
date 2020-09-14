@@ -3,27 +3,27 @@ import request from 'superagent'
 export function getAllTasks () {
     return request
     .get('/v1/tasks')
+    // .get('/')
     .then(response => response.body)
-
 }
 
-export function apiAddTask (task) {
-    return request
-    .post('/v1/tasks')
-    .send(task)
-    .then(response => response.body.id)
-}
+// export function apiAddTask (task) {
+//     return request
+//     .post('/v1/tasks')
+//     .send(task)
+//     .then(response => response.body.id)
+// }
 
-export function apiDeleteTask (id) {
-    return request
-    .delete('/v1/tasks/' + id)
-    .then(response => response.body)
+// export function apiDeleteTask (id) {
+//     return request
+//     .delete('/v1/tasks/' + id)
+//     .then(response => response.body)
 
-}
+// }
 
 // export function apiUpdateTask (task) {
 //   return request
-//   .post('/v1/tasks')
-//   .send(task)
+//   .post('/')
+//   .send(item)
 //   .then(response => response.body.id)
 // }

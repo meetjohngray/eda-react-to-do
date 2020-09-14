@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { getAllTasks } from '../apis/index'
 
 function AddTodo(props) {
     return (

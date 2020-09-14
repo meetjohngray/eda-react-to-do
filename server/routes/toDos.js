@@ -6,7 +6,9 @@ const db = require('../db/connection')
 router.get('/', (req, res) => {
   db.getToDos()
     .then(list => {
+      console.log(list)
       res.json(list)
+      
     })
     .catch(
       console.log('Nothing here.')
