@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { deleleItem } from '../actions/shopping'
 
-import { getAllTasks, apiDeleteTask } from '../apis/index'
-import { initTask, deleteTask } from '../actions/index'
+import { getAllTasks, apiDeleteTask, apiUpdateTask } from '../apis/index'
+import { initTask, deleteTask, updateTask } from '../actions/index'
 
 class TaskList extends React.Component {
   // state = {
@@ -22,6 +21,15 @@ class TaskList extends React.Component {
         this.props.dispatch(deleteTask(id))
     })
   }
+  
+  doubleClick = ( id, event) => {
+    // event.preventDefault()
+    console.log("update!")
+    // apiUpdateTask(id)
+    // .then(() => {
+    //     this.props.dispatch(updateTask(id))
+    // })
+  }
 
   render() {
     return (
@@ -38,7 +46,7 @@ class TaskList extends React.Component {
               <div className="view">
                 {/* <input class="toggle" type="checkbox" checked /> */}
                 <input className="toggle" type="checkbox" />
-                <label>{task.task}</label>
+                <label onDoubleClick={()=>this.doubleClick(task.id)}>{task.task}</label>
                 {/* <p>{task.details}</p> */}
                 {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
                 <button className="destroy" onClick={()=>this.handleClick(task.id)}>

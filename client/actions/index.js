@@ -1,6 +1,7 @@
 export const INIT_TASK = 'INIT_TASK'
 export const ADD_TASK = 'ADD_TASK'
 export const DEL_TASK = 'DEL_TASK'
+export const UPDATE_TASK = 'UPDATE_TASK'
 
 export function initTask (task) {
   return {
@@ -18,6 +19,13 @@ export function addTask (task) {
 export function deleteTask (task) {
   return {
     type: DEL_TASK,
+    task
+  }
+}
+
+export function updateTask (task) {
+  return {
+    type: UPDATE_TASK,
     task
   }
 }

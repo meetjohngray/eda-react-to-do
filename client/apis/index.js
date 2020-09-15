@@ -20,9 +20,9 @@ export function apiDeleteTask (id) {
     .then(response => response.body)
 }
 
-// export function apiUpdateTask (task) {
-//   return request
-//   .post('/')
-//   .send(item)
-//   .then(response => response.body.id)
-// }
+export function apiUpdateTask (task) {
+  return request
+  .post('/')
+  .send(item)
+  .then(response => response.body.id)
+}
