@@ -14,12 +14,11 @@ export function apiAddTask (task) {
     .then(response => response.body.id)
 }
 
-// export function apiDeleteTask (id) {
-//     return request
-//     .delete('/v1/tasks/' + id)
-//     .then(response => response.body)
-
-// }
+export function apiDeleteTask (id) {
+    return request
+    .delete('/v1/tasks/' + id)
+    .then(response => response.body)
+}
 
 // export function apiUpdateTask (task) {
 //   return request

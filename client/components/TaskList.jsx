@@ -2,22 +2,32 @@ import React from 'react'
 import { connect } from 'react-redux'
 // import { deleleItem } from '../actions/shopping'
 
-import { getAllTasks } from '../apis/index'
-import { initTask} from '../actions/index'
+import { getAllTasks, apiDeleteTask } from '../apis/index'
+import { initTask, deleteTask } from '../actions/index'
 
 class TaskList extends React.Component {
-  
+  // state = {
+  //   task: ''
+  // }
+
   componentDidMount() {
     getAllTasks()
       .then(task => (this.props.dispatch(initTask(task))))
 
   }
 
-  handleChange = (event) => {
-    this.setState({
-        [event.target.name]: event.target.value
-    })
-  }
+  // handleClick = ( event) => {
+  //   // event.preventDefault()
+  //   console.log('hi')
+  //   apiDeleteTask(task.id)
+  //   .then(() => {
+  //       this.props.dispatch(deleteTask(task.id))
+  //   })
+    
+    // this.setState({
+    //     [event.target.name]: event.target.value
+    // })
+  // }
 
   render() {
     return (
@@ -35,8 +45,16 @@ class TaskList extends React.Component {
                 {/* <input class="toggle" type="checkbox" checked /> */}
                 <input className="toggle" type="checkbox" />
                 <label>{task.task}</label>
-                <button className="destroy"></button>
-                {/* <input className="edit" value="Create a TodoMVC template" /> */}
+                {/* <p>{task.details}</p> */}
+                <button className="destroy" onClick={
+                  () => {
+                    apiDeleteTask(task.id)
+                    .then(() => {
+                      this.props.dispatch(deleteTask(task.id))
+                    })
+                  }}>
+                </button> 
+                <input className="edit" value="Create a TodoMVC template" />
             </div>
             </li>
           )
@@ -61,7 +79,7 @@ class TaskList extends React.Component {
     </section>
     <footer className="footer">
     {/* <!-- This should be `0 items left` by default --> */}
-    <span className="todo-count"><strong>0</strong> item left</span>
+      <span className="todo-count"><strong>{this.props.tasks.length}</strong> item left</span>
     {/* <!-- Remove this if you don't implement routing --> */}
     <ul className="filters">
       <li>

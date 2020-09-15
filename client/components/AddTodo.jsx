@@ -5,33 +5,30 @@ import { addTask } from '../actions/index'
 
 class  AddTodo extends React.Component {
   
+  // Set the initial state of task
   state = {
     task: ''
   }
 
   handleChange = (event) => {
-    // console.log('hi')
+    // Get the change from the input field and put it in task state
     this.setState({
         task: event.target.value
     })
   }
 
   handleSubmit = (event) => {
+    // If the enter key is used, do the following
     if( event.key == "Enter") {
-      console.log("yes")
-      // this.setState({ task: '' })
-      // const newTask = {task: this.state.task}
-  
+      // Add the task to the db
       apiAddTask(this.state)
-          .then(id => {
-              // newTask.id = id
-              this.props.dispatch(addTask(this.state))
-              this.setState({ task: '' })
-              // console.log('id')
-          })
+         .then(
+          // Change the current state to reflect the change
+          this.props.dispatch(addTask(this.state)),
+          // Reset the form to an empty string
+          this.setState({ task: '' })
+          )
     }
-    
-   
 }
   render(){
     return (
