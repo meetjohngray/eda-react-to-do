@@ -10,7 +10,13 @@ class TaskList extends React.Component {
   componentDidMount() {
     getAllTasks()
       .then(task => (this.props.dispatch(initTask(task))))
-      console.log(this.props)
+
+  }
+
+  handleChange = (event) => {
+    this.setState({
+        [event.target.name]: event.target.value
+    })
   }
 
   render() {
@@ -27,10 +33,10 @@ class TaskList extends React.Component {
             <li key={task.id}>
               <div className="view">
                 {/* <input class="toggle" type="checkbox" checked /> */}
-                <input class="toggle" type="checkbox" />
+                <input className="toggle" type="checkbox" />
                 <label>{task.task}</label>
-                <button class="destroy"></button>
-                <input class="edit" value="Create a TodoMVC template" />
+                <button className="destroy"></button>
+                {/* <input className="edit" value="Create a TodoMVC template" /> */}
             </div>
             </li>
           )

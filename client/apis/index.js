@@ -7,6 +7,7 @@ export function getAllTasks () {
 }
 
 export function apiAddTask (task) {
+  console.log(task)
     return request
     .post('/v1/tasks')
     .send(task)
