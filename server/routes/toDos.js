@@ -25,4 +25,29 @@ router.post('/', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+  const id = Number(req.params.id)
+  console.log(id)
+  db.deleteToDo(id)
+  .then(taskDeleted => {
+    res.json(taskDeleted)
+  })
+  // .catch(err => {
+  //   res.send(err.message)
+  // })
+})
+
+router.patch('/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const updatedToDo = {
+    id: Number(req.params.id),
+    ...req.body
+  }
+  db.updateToDo(id, updatedToDo)
+    .then(updatedTask => {
+      res.json(updatedTask)
+    })
+  // res.sendStatus(204)
+})
+
 module.exports = router
