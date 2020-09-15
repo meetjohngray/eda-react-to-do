@@ -13,21 +13,15 @@ class TaskList extends React.Component {
   componentDidMount() {
     getAllTasks()
       .then(task => (this.props.dispatch(initTask(task))))
-
   }
 
-  // handleClick = ( event) => {
-  //   // event.preventDefault()
-  //   console.log('hi')
-  //   apiDeleteTask(task.id)
-  //   .then(() => {
-  //       this.props.dispatch(deleteTask(task.id))
-  //   })
-    
-    // this.setState({
-    //     [event.target.name]: event.target.value
-    // })
-  // }
+  handleClick = ( id, event) => {
+    event.preventDefault()
+    apiDeleteTask(id)
+    .then(() => {
+        this.props.dispatch(deleteTask(id))
+    })
+  }
 
   render() {
     return (
@@ -46,13 +40,8 @@ class TaskList extends React.Component {
                 <input className="toggle" type="checkbox" />
                 <label>{task.task}</label>
                 {/* <p>{task.details}</p> */}
-                <button className="destroy" onClick={
-                  () => {
-                    apiDeleteTask(task.id)
-                    .then(() => {
-                      this.props.dispatch(deleteTask(task.id))
-                    })
-                  }}>
+                {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
+                <button className="destroy" onClick={()=>this.handleClick(task.id)}>
                 </button> 
                 <input className="edit" value="Create a TodoMVC template" />
             </div>
