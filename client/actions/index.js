@@ -23,9 +23,9 @@ export function deleteTask (task) {
   }
 }
 
-export function updateTask (task) {
+export function updateTask (id, task) {
   return {
     type: UPDATE_TASK,
-    task
+    task, id
   }
 }

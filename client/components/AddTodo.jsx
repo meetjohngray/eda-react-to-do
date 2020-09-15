@@ -7,7 +7,7 @@ class  AddTodo extends React.Component {
   
   // Set the initial state of task
   state = {
-    task: ''
+    task: '',
   }
 
   handleChange = (event) => {
@@ -22,12 +22,18 @@ class  AddTodo extends React.Component {
     if( event.key == "Enter") {
       // Add the task to the db
       apiAddTask(this.state)
-         .then(
-          // Change the current state to reflect the change
-          this.props.dispatch(addTask(this.state)),
+        // We need the id so that after we add the task, the edit task form doesn't fire
+         .then((id) => {
+          //  We turn our info into an object...
+           const taskObj = {
+             task: this.state.task,
+             id: id
+           }
+            // And give this object to our action to change the current state to reflect the changes
+          this.props.dispatch(addTask(taskObj))
           // Reset the form to an empty string
-          this.setState({ task: '' })
-          )
+          this.setState({ task: ''})
+        })
     }
 }
   render(){

@@ -5,17 +5,16 @@ import { getAllTasks, apiDeleteTask, apiUpdateTask } from '../apis/index'
 import { initTask, deleteTask, updateTask } from '../actions/index'
 
 class TaskList extends React.Component {
-  // state = {
-  //   task: ''
-  // }
+  state = {
+    edit_Task: null //Use null when using numbers
+  }
 
   componentDidMount() {
     getAllTasks()
       .then(task => (this.props.dispatch(initTask(task))))
   }
 
-  handleClick = ( id, event) => {
-    event.preventDefault()
+  handleClick = ( id ) => {
     apiDeleteTask(id)
     .then(() => {
         this.props.dispatch(deleteTask(id))
@@ -23,13 +22,28 @@ class TaskList extends React.Component {
   }
   
   doubleClick = ( id, event) => {
-    // event.preventDefault()
-    console.log("update!")
-    // apiUpdateTask(id)
-    // .then(() => {
-    //     this.props.dispatch(updateTask(id))
-    // })
+    this.setState({
+      edit_Task: id
+    })
   }
+  
+  handleSubmit = (id, event) => {
+    const value = event.target.value
+    if( event.key === "Enter") {
+      const newTask = { task: value }
+      apiUpdateTask(id, newTask)
+      .then(() => {
+        this.props.dispatch(updateTask(id, value))
+        this.setState({ edit_Task: null })
+      })
+    }
+  }
+  
+  toggleDone = (id, event) => {
+    console.log(id)
+    
+  }
+
 
   render() {
     return (
@@ -45,8 +59,10 @@ class TaskList extends React.Component {
             <li key={task.id}>
               <div className="view">
                 {/* <input class="toggle" type="checkbox" checked /> */}
-                <input className="toggle" type="checkbox" />
-                <label onDoubleClick={()=>this.doubleClick(task.id)}>{task.task}</label>
+                <input className="toggle" type="checkbox" onClick={(event) => this.toggleDone(task.id,event)} />
+                <label onDoubleClick={()=>this.doubleClick(task.id)}>
+                 {(this.state.edit_Task == task.id) ? <input type="text" defaultValue = {task.task} onKeyDown={(event)=>this.handleSubmit(task.id, event)}/> : task.task}
+                </label>
                 {/* <p>{task.details}</p> */}
                 {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
                 <button className="destroy" onClick={()=>this.handleClick(task.id)}>
@@ -56,22 +72,6 @@ class TaskList extends React.Component {
             </li>
           )
         })}
-        {/* <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Taste JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Create a TodoMVC template" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Rule the web" />
-        </li> */}
       </ul>
     </section>
     <footer className="footer">
@@ -102,3 +102,21 @@ function mapStateToProps(globalState) {
 }
 
 export default connect(mapStateToProps)(TaskList)
+
+
+{/* <li class="completed">
+          <div class="view">
+            <input class="toggle" type="checkbox" checked />
+            <label>Taste JavaScript</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="Create a TodoMVC template" />
+        </li>
+        <li>
+          <div class="view">
+            <input class="toggle" type="checkbox" />
+            <label>Buy a unicorn</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="Rule the web" />
+        </li> */}

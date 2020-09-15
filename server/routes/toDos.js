@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = Number(req.params.id)
-  console.log(id)
+  // console.log(id)
   db.deleteToDo(id)
   .then(taskDeleted => {
     res.json(taskDeleted)

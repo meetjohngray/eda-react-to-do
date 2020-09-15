@@ -15,9 +15,16 @@ const reducer = (state = initialState, action) => {
     case DEL_TASK: 
       return state.filter((task) => task.id !==  action.task)
     
-    // This probably needs work 
+    // case 'Bananas':
+    //   return "I like bANANAS!!!"
+    
     case UPDATE_TASK: 
-      return [...state, action.task]
+      return state.map((task)=>{
+        if(task.id === action.id ){
+          task.task = action.task
+        }
+        return task
+      })
 
     default:
       return state
