@@ -18,10 +18,12 @@ const reducer = (state = initialState, action) => {
     // case 'Bananas':
     //   return "I like bANANAS!!!"
     
+
     case UPDATE_TASK: 
       return state.map((task)=>{
         if(task.id === action.id ){
-          task.task = action.task
+          task.task = action.task.task
+          task.isCompleted = action.task.isCompleted
         }
         return task
       })

@@ -39,13 +39,11 @@ class TaskList extends React.Component {
     }
   }
   
-  toggleDone = (task, event) => {
-    const completed = { completed: event.target.checked}
-    console.log(task)
+  toggleDone = (id, task, event) => {
     task.isComplete = event.target.checked
-    // console.log(task.completed)
-    .then(() => {
-      this.props.dispatch(updateTask(id, value))
+    apiUpdateTask(id, task)
+      .then(() => {
+      this.props.dispatch(updateTask(id, task))
       this.setState({ edit_Task: null })
     })
   }
@@ -66,7 +64,7 @@ class TaskList extends React.Component {
               {console.log(task.isComplete)}
               <div className="view">
                 {/* <input class="toggle" type="checkbox" checked /> */}
-                <input className="toggle" type="checkbox" onChange={(event) => this.toggleDone(task,event)} defaultChecked={task.completed} />
+                <input className="toggle" type="checkbox" onChange={(event) => this.toggleDone(task.id,task,event)} defaultChecked={task.isComplete} />
                 <label onDoubleClick={()=>this.doubleClick(task.id)}>
                  {(this.state.edit_Task == task.id) ? <input type="text" defaultValue = {task.task} onKeyDown={(event)=>this.handleSubmit(task.id, event)}/> : task.task}
                 </label>

@@ -23,7 +23,8 @@ export function deleteTask (task) {
   }
 }
 
-export function updateTask (id, task) {
+export function updateTask (id, task ) {
+  console.log('Action', task.task)
   return {
     type: UPDATE_TASK,
     task, id

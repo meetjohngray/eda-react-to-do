@@ -20,9 +20,10 @@ export function apiDeleteTask (id) {
     .then(response => response.body)
 }
 
-export function apiUpdateTask (id,newTask) {
+export function apiUpdateTask (id,task) {
+  console.log('api')
   return request
   .patch('/v1/tasks/' + id)
-  .send(newTask)
+  .send(task)
   .then(response => response.body.id)
 }
