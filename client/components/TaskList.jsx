@@ -39,9 +39,15 @@ class TaskList extends React.Component {
     }
   }
   
-  toggleDone = (id, event) => {
-    console.log(id)
-    
+  toggleDone = (task, event) => {
+    const completed = { completed: event.target.checked}
+    console.log(task)
+    task.isComplete = event.target.checked
+    // console.log(task.completed)
+    .then(() => {
+      this.props.dispatch(updateTask(id, value))
+      this.setState({ edit_Task: null })
+    })
   }
 
 
@@ -56,10 +62,11 @@ class TaskList extends React.Component {
         {/* <!-- List items should get the class `editing` when editing and `completed` when marked as completed --> */}
         {this.props.tasks.map(task => {
           return (
-            <li key={task.id}>
+            <li key={task.id} className={task.isComplete ? 'completed' : ''}>
+              {console.log(task.isComplete)}
               <div className="view">
                 {/* <input class="toggle" type="checkbox" checked /> */}
-                <input className="toggle" type="checkbox" onClick={(event) => this.toggleDone(task.id,event)} />
+                <input className="toggle" type="checkbox" onChange={(event) => this.toggleDone(task,event)} defaultChecked={task.completed} />
                 <label onDoubleClick={()=>this.doubleClick(task.id)}>
                  {(this.state.edit_Task == task.id) ? <input type="text" defaultValue = {task.task} onKeyDown={(event)=>this.handleSubmit(task.id, event)}/> : task.task}
                 </label>
