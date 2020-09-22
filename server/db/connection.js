@@ -6,7 +6,6 @@ const connection = knex(config[env])
 module.exports = { getToDos, addToDo, deleteToDo, updateToDo }
 
 function getToDos ( db = connection ) {
-  // console.log(db)
   return db('toDos').select()
 }
 

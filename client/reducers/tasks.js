@@ -17,7 +17,6 @@ const reducer = (state = initialState, action) => {
     
     // case 'Bananas':
     //   return "I like bANANAS!!!"
-    
 
     case UPDATE_TASK: 
       return state.map((task)=>{

@@ -27,13 +27,18 @@ class TaskList extends React.Component {
     })
   }
   
-  handleSubmit = (id, event) => {
+  handleSubmit = (task, event) => {
+    // Create this variable to update the name of the todo based on what is typed in the field
     const value = event.target.value
+    // If the enter key is hit, 
     if( event.key === "Enter") {
+      // Send the value as an object to the db to update the task name 
       const newTask = { task: value }
-      apiUpdateTask(id, newTask)
+      apiUpdateTask(task.id, newTask)
+      // then set task.task as the submitted value and dispatch this to global state
       .then(() => {
-        this.props.dispatch(updateTask(id, value))
+        task.task = value
+        this.props.dispatch(updateTask(task.id, task))
         this.setState({ edit_Task: null })
       })
     }
@@ -53,32 +58,41 @@ class TaskList extends React.Component {
     return (
       <>
       <section className="main">
-      <input id="toggle-all" className="toggle-all" type="checkbox" />
-      <label htmlFor="toggle-all">Mark all as complete</label>
-      <ul className="todo-list">
-        {/* <!-- These are here just to show the structure of the list items --> */}
-        {/* <!-- List items should get the class `editing` when editing and `completed` when marked as completed --> */}
-        {this.props.tasks.map(task => {
-          return (
-            <li key={task.id} className={task.isComplete ? 'completed' : ''}>
-              {console.log(task.isComplete)}
-              <div className="view">
-                {/* <input class="toggle" type="checkbox" checked /> */}
-                <input className="toggle" type="checkbox" onChange={(event) => this.toggleDone(task.id,task,event)} defaultChecked={task.isComplete} />
-                <label onDoubleClick={()=>this.doubleClick(task.id)}>
-                 {(this.state.edit_Task == task.id) ? <input type="text" defaultValue = {task.task} onKeyDown={(event)=>this.handleSubmit(task.id, event)}/> : task.task}
-                </label>
-                {/* <p>{task.details}</p> */}
-                {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
-                <button className="destroy" onClick={()=>this.handleClick(task.id)}>
-                </button> 
-                <input className="edit" value="Create a TodoMVC template" />
-            </div>
-            </li>
-          )
-        })}
-      </ul>
-    </section>
+        <input id="toggle-all" className="toggle-all" type="checkbox" />
+        <label htmlFor="toggle-all">Mark all as complete</label>
+        <ul className="todo-list">
+          {/* <!-- These are here just to show the structure of the list items --> */}
+          {/* <!-- List items should get the class `editing` when editing and `completed` when marked as completed --> */}
+          {this.props.tasks.map(task => {
+            return (
+              <li key={task.id} className={task.isComplete ? 'completed' : ''}>
+                {/* {console.log(task.isComplete)} */}
+                <div className="view">
+                  {/* <input class="toggle" type="checkbox" checked /> */}
+                  <input className="toggle" type="checkbox" 
+                    onChange={(event) => this.toggleDone(task.id,task,event)} 
+                    defaultChecked={task.isComplete} 
+                  />
+                  <label onDoubleClick={()=>this.doubleClick(task.id)}>
+                    {(this.state.edit_Task == task.id) ? 
+                    <input type="text" defaultValue = {task.task} 
+                      onKeyDown={(event)=>this.handleSubmit(task, event)}
+                    /> 
+                    : task.task}
+                  </label>
+                  {/* <p>{task.details}</p> */}
+                  {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
+                  <button className="destroy" 
+                    onClick={()=>this.handleClick(task.id)}>
+                  </button> 
+                  <input className="edit" value="Create a TodoMVC template" />
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+    
     <footer className="footer">
     {/* <!-- This should be `0 items left` by default --> */}
       <span className="todo-count"><strong>{this.props.tasks.length}</strong> item left</span>
