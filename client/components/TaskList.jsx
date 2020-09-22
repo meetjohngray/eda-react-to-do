@@ -1,18 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ListItem from './ListItem'
-import { getAllTasks } from '../apis/index'
-import { initTask } from '../actions/index'
+import { apiDeleteTask, getAllTasks } from '../apis/index'
+import { initTask, deleteTask } from '../actions/index'
 
 class TaskList extends React.Component {
-//   state = {
-//     edit_Task: null //Use null when using numbers
-//   }
 
   componentDidMount() {
     getAllTasks()
       .then(task => (this.props.dispatch(initTask(task))))
   }
+  
+  handleClick = () => {
+    // I grab the props tasks, then itererate through each individual task
+    this.props.tasks.forEach(task => {
+      if(task.isComplete){
+        apiDeleteTask(task.id)
+          .then(() => {
+            this.props.dispatch(deleteTask(task.id))
+          })
+        } 
+      }
+    )}
 
   render() {
     return (
@@ -48,7 +57,7 @@ class TaskList extends React.Component {
       </li>
     </ul>
     {/* <!-- Hidden if no completed items are left ↓ --> */}
-    <button className="clear-completed">Clear completed</button>
+    <button className="clear-completed" onClick={this.handleClick}>Clear completed</button>
   </footer>
   </>
     )

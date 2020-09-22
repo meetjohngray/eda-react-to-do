@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { getAllTasks, apiDeleteTask, apiUpdateTask } from '../apis/index'
-import { initTask, deleteTask, updateTask } from '../actions/index'
+import {  apiDeleteTask, apiUpdateTask } from '../apis/index'
+import { deleteTask, updateTask } from '../actions/index'
 
 class ListItem extends React.Component {
   state = {
