@@ -57,7 +57,7 @@ class TaskList extends React.Component {
       </li>
     </ul>
     {/* <!-- Hidden if no completed items are left ↓ --> */}
-    <button className="clear-completed" onClick={this.handleClick}>Clear completed</button>
+    {this.props.tasks.length > 0 ? <button className="clear-completed" onClick={this.handleClick}>Clear completed</button> : ''}
   </footer>
   </>
     )
