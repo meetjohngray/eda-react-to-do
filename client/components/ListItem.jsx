@@ -6,7 +6,7 @@ import { deleteTask, updateTask } from '../actions/index'
 
 class ListItem extends React.Component {
   state = {
-    edit_Task: null //Use null when using numbers
+    edit_Task: null//Use null when using numbers
   }
   
   handleClick = ( id ) => {
@@ -48,10 +48,22 @@ class ListItem extends React.Component {
     })
   }
 
+  liClass = () => {
+    if(this.props.task.isComplete){
+      return 'completed'
+    } else if (this.state.edit_Task){
+      return 'editing'
+    } else {
+      return ''
+    }
+  }
+
   render() {
     return (
-            <li key={this.props.task.id} className={this.props.task.isComplete ? 'completed' : ''}>
-              {/* {console.log(this.props.task.isComplete)} */}
+            <li key={this.props.task.id} 
+              // className={this.props.task.isComplete ? 'completed' : '' }
+              className={this.liClass()}
+            >
               <div className="view">
                 {/* <input class="toggle" type="checkbox" checked /> */}
                 <input className="toggle" type="checkbox" 
