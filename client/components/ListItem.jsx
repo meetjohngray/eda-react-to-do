@@ -88,7 +88,6 @@ class ListItem extends React.Component {
           }
 }
 
-
 export default connect()(ListItem)
 
 

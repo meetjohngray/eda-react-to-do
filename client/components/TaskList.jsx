@@ -6,6 +6,10 @@ import { initTask, deleteTask } from '../actions/index'
 
 class TaskList extends React.Component {
 
+  state = {
+    listState: 'all'
+  }
+
   componentDidMount() {
     getAllTasks()
       .then(task => (this.props.dispatch(initTask(task))))
@@ -21,9 +25,19 @@ class TaskList extends React.Component {
           })
         } 
       }
-    )}
+  )}
 
+  stateClick = (newState) => {
+    console.log(newState)
+    this.setState = ({
+      listState: newState
+    })
+  }
+  
   render() {
+
+  const filterList = this.props.tasks.filter(task => task.isComplete)
+  console.log(filterList)  
     return (
       <>
       <section className="main">
@@ -32,6 +46,7 @@ class TaskList extends React.Component {
         <ul className="todo-list">
           {/* <!-- These are here just to show the structure of the list items --> */}
           {/* <!-- List items should get the class `editing` when editing and `completed` when marked as completed --> */}
+          
           {this.props.tasks.map(task => {
             return (
               // Once I pass this over, I need to refer to it with this.state.props
@@ -46,14 +61,15 @@ class TaskList extends React.Component {
       <span className="todo-count"><strong>{this.props.tasks.length}</strong> item left</span>
     {/* <!-- Remove this if you don't implement routing --> */}
     <ul className="filters">
+    {/* onClick={()=>this.handleClick(this.props.task.id)} */}
       <li>
-        <a className="selected" href="#/">All</a>
+        <a className="selected" href="#/" onClick={()=>this.stateClick('all')}>All</a>
       </li>
       <li>
-        <a href="#/active">Active</a>
+        <a href="#/active" onClick={()=>this.stateClick('active')}>Active</a>
       </li>
       <li>
-        <a href="#/completed">Completed</a>
+        <a href="#/completed" onClick={()=>this.stateClick('completed')}>Completed</a>
       </li>
     </ul>
     {/* <!-- Hidden if no completed items are left ↓ --> */}
