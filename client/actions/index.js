@@ -1,7 +1,9 @@
+
 export const INIT_TASK = 'INIT_TASK'
 export const ADD_TASK = 'ADD_TASK'
 export const DEL_TASK = 'DEL_TASK'
 export const UPDATE_TASK = 'UPDATE_TASK'
+export const FILTER_TASK = 'FILTER_TASK'
 
 export function initTask (task) {
   return {
@@ -27,5 +29,12 @@ export function updateTask (id, task ) {
   return {
     type: UPDATE_TASK,
     task, id
+  }
+}
+
+export function filterTask (filter) {
+  return {
+    type: FILTER_TASK,
+    filter
   }
 }

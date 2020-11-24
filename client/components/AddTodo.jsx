@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { apiAddTask } from '../apis/index'
 import { addTask } from '../actions/index'
 
-class  AddTodo extends React.Component {
+class AddTodo extends React.Component {
   
   // Set the initial state of task
   state = {
@@ -12,13 +12,12 @@ class  AddTodo extends React.Component {
 
   handleChange = (event) => {
     // Get the change from the input field and put it in task state
-    this.setState({
-        task: event.target.value
-    })
+    return this.setState({task: event.target.value})
   }
 
   handleSubmit = (event) => {
     // If the enter key is used, do the following
+    // event.preventDefault()
     if( event.key == "Enter") {
       // Add the task to the db
       apiAddTask(this.state)

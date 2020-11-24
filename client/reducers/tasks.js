@@ -1,4 +1,4 @@
-import { ADD_TASK, INIT_TASK, DEL_TASK, UPDATE_TASK } from '../actions/index'
+import { ADD_TASK, INIT_TASK, DEL_TASK, UPDATE_TASK, FILTER_TASK } from '../actions/index'
 
 const initialState = []
 
@@ -26,6 +26,15 @@ const reducer = (state = initialState, action) => {
         }
         return task
       })
+    
+      case FILTER_TASK: 
+        if(action.filter == 'completed'){
+          return state.filter(task => task.isComplete == true)
+        } else if (action.filter == 'active') {
+          return state.filter(task => task.isComplete == false)
+        }
+        
+        
 
     default:
       return state

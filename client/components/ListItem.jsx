@@ -72,7 +72,7 @@ class ListItem extends React.Component {
                 />
                 <label onDoubleClick={()=>this.doubleClick(this.props.task.id)}>
                   {(this.state.edit_Task == this.props.task.id) ? 
-                  <input type="text" class="edit-todo" defaultValue = {this.props.task.task} 
+                  <input type="text" className="edit-todo" defaultValue = {this.props.task.task} 
                     onKeyDown={(event)=>this.handleSubmit(this.props.task, event)}
                   /> 
                   : this.props.task.task}

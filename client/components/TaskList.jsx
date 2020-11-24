@@ -6,13 +6,17 @@ import { initTask, deleteTask } from '../actions/index'
 
 class TaskList extends React.Component {
 
-  state = {
-    listState: 'all'
-  }
+  // state = {
+  //   listState: 'all',
+  //   displayList: []
+  // }
 
   componentDidMount() {
     getAllTasks()
-      .then(task => (this.props.dispatch(initTask(task))))
+      .then(task => {
+        (this.props.dispatch(initTask(task)))
+        // this.chooseList()
+      })    
   }
   
   handleClick = () => {
@@ -27,17 +31,32 @@ class TaskList extends React.Component {
       }
   )}
 
-  stateClick = (newState) => {
-    console.log(newState)
-    this.setState = ({
-      listState: newState
-    })
-  }
+  // stateClick = (newState) => {
+  //   console.log('The new state', newState)
+  //   this.setState({
+  //     listState: newState
+  //   })
+  //   console.log(this.state)
+  //   this.chooseList()
+  // }
+  
+  //  chooseList = () => {
+  //   let completedTasks =  this.props.tasks.filter(task => task.isComplete)
+  //   let uncompletedTasks =  this.props.tasks.filter(task => !task.isComplete)
+  //   let displayList
+  //   if (this.state.listState == 'all'){
+  //     this.setState({displayList: this.props.tasks})
+  //   } else if (this.state.listState == 'completed'){
+  //     this.setState({displayList: completedTasks})
+  //   } else if (this.state.listState == 'active'){
+  //     this.setState({displayList:uncompletedTasks})
+  //   }
+  //   console.log(this.state.displayList)
+  //   // return this.state.displayList
+  // }
   
   render() {
-
-  const filterList = this.props.tasks.filter(task => task.isComplete)
-  console.log(filterList)  
+    // this.chooseList()
     return (
       <>
       <section className="main">
