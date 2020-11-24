@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
       return state.map((task)=>{
         if(task.id === action.id ){
           task.task = action.task.task
-          task.isCompleted = action.task.isCompleted
+          task.isComplete = action.task.isComplete
         }
         return task
       })
