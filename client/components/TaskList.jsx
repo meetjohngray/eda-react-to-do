@@ -31,16 +31,7 @@ class TaskList extends React.Component {
       }
   )}
 
-  stateClick = (newState) => {
-    console.log('The new state', newState)
-    this.setState({
-      listState: newState
-    })
-    console.log(this.state)
-    this.chooseList()
-  }
-  
-   chooseList = () => {
+  chooseList = () => {
     let completedTasks =  this.props.tasks.filter(task => task.isComplete)
     let uncompletedTasks =  this.props.tasks.filter(task => !task.isComplete)
     let displayList
@@ -51,12 +42,25 @@ class TaskList extends React.Component {
     } else if (this.state.listState == 'active'){
       this.setState({displayList:uncompletedTasks})
     }
-    console.log(this.state.displayList)
     return this.state.displayList
   }
+
+  // Pass a callback into setState because 
+  // it DOES not update state instantaneously
+  // The callback makes it wait to get the proper
+  // displayList until AFTER setState is complete
+  stateClick = (newState) => {
+    this.setState({
+      listState: newState
+      // Just chooseList without the ()
+      // When the () is present, the results
+      // of chooseList (an array of objects) is returned
+    }, this.chooseList)
+  }
+  
+   
   
   render() {
-    // this.chooseList()
     return (
       <>
       <section className="main">

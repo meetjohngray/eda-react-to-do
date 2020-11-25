@@ -16,8 +16,9 @@ class AddTodo extends React.Component {
   }
 
   handleSubmit = (event) => {
+    // This is probably not necessary in this case, but it can't hurt
+    event.preventDefault()
     // If the enter key is used, do the following
-    // event.preventDefault()
     if( event.key == "Enter") {
       // Add the task to the db
       apiAddTask(this.state)
