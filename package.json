@@ -11,7 +11,8 @@
     "start": "node server",
     "test": "jest --noStackTrace --watchAll",
     "build": "webpack",
-    "knex": "knex --knexfile ./server/db/knexfile.js"
+    "knex": "knex --knexfile ./server/db/knexfile.js",
+    "lint": "eslint --ext .js,.jsx ."
   },
   "author": "EDA",
   "license": "ISC",
@@ -25,6 +26,12 @@
       "@babel/plugin-proposal-object-rest-spread"
     ]
   },
+  "eslintConfig": {
+    "extends": "eda",
+    "ignorePatterns": [
+      "bundle.js"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -33,7 +40,10 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
+    "eslint": "^7.14.0",
+    "eslint-config-eda": "^0.1.4",
     "jest": "^26.4.1",
+    "nock": "^13.0.5",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

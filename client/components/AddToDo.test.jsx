@@ -3,7 +3,6 @@ import {render, screen, fireEvent} from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import AddToDo from './AddTodo'
-import { debug } from 'webpack'
  
 const store = {
   dispatch: jest.fn(),
