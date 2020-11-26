@@ -60,7 +60,7 @@ class TaskList extends React.Component {
             })
               .map(task => {
                 // Once I pass this over, I need to refer to it with this.state.props
-                return <ListItem task={task}/>
+                return <ListItem key= {task.id} task={task}/>
               })
             }
           </ul>
@@ -73,13 +73,13 @@ class TaskList extends React.Component {
           <ul className="filters">
             {/* onClick={()=>this.handleClick(this.props.task.id)} */}
             <li>
-              <a className="selected" href="#/" onClick={ event => this.filterClick(event, 'all')}>All</a>
+              <a className ={ this.state.filter == 'all' ? 'selected' : ''} href="#/" onClick={ event => this.filterClick(event, 'all')}>All</a>
             </li>
             <li>
-              <a href="#/active" onClick={ event => this.filterClick(event, 'active')}>Active</a>
+              <a className ={ this.state.filter == 'active' ? 'selected' : ''} href="#/active" onClick={ event => this.filterClick(event, 'active')}>Active</a>
             </li>
             <li>
-              <a href="#/completed" onClick={ event => this.filterClick(event, 'completed')}>Completed</a>
+              <a className ={ this.state.filter == 'completed' ? 'selected' : ''} href="#/completed" onClick={ event => this.filterClick(event, 'completed')}>Completed</a>
             </li>
           </ul>
           {/* <!-- Hidden if no completed items are left ↓ --> */}
