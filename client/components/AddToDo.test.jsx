@@ -1,9 +1,9 @@
 import React from 'react'
-import {render, screen, fireEvent} from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import AddToDo from './AddTodo'
- 
+
 const store = {
   dispatch: jest.fn(),
   getState: jest.fn(),
@@ -13,11 +13,9 @@ const store = {
 describe('<AddToDo />', () => {
   test('submitting an input dispatches addTask action', () => {
     render(<Provider store={store}><AddToDo /></Provider>)
-    let input = screen.getByRole('textbox')
-    fireEvent.change(input, {target: {value: 'new task'}})
-    fireEvent.submit(input)
+    const input = screen.getByRole('textbox')
+    fireEvent.change(input, { target: { value: 'new task' } })
+    fireEvent.keyDown(input)
     expect(store.dispatch).toHaveBeenCalled()
   })
 })
-
-
