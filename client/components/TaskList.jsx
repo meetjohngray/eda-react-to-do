@@ -24,11 +24,13 @@ class TaskList extends React.Component {
         apiDeleteTask(task.id)
           .then(() => {
             this.props.dispatch(deleteTask(task.id))
+            this.setState({
+              filter: 'all'
+            })
           })
           .catch(err => console.log(err))
       }
-    }
-    )
+    })
   }
 
   filterClick = (event, filter) => {
@@ -73,13 +75,13 @@ class TaskList extends React.Component {
           <ul className="filters">
             {/* onClick={()=>this.handleClick(this.props.task.id)} */}
             <li>
-              <a className ={ this.state.filter == 'all' ? 'selected' : ''} href="#/" onClick={ event => this.filterClick(event, 'all')}>All</a>
+              <a className ={ this.state.filter === 'all' ? 'selected' : ''} href="#/" onClick={ event => this.filterClick(event, 'all')}>All</a>
             </li>
             <li>
-              <a className ={ this.state.filter == 'active' ? 'selected' : ''} href="#/active" onClick={ event => this.filterClick(event, 'active')}>Active</a>
+              <a className ={ this.state.filter === 'active' ? 'selected' : ''} href="#/active" onClick={ event => this.filterClick(event, 'active')}>Active</a>
             </li>
             <li>
-              <a className ={ this.state.filter == 'completed' ? 'selected' : ''} href="#/completed" onClick={ event => this.filterClick(event, 'completed')}>Completed</a>
+              <a className ={ this.state.filter === 'completed' ? 'selected' : ''} href="#/completed" onClick={ event => this.filterClick(event, 'completed')}>Completed</a>
             </li>
           </ul>
           {/* <!-- Hidden if no completed items are left ↓ --> */}
