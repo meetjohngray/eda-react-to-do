@@ -25,7 +25,7 @@ class TaskList extends React.Component {
           .then(() => {
             this.props.dispatch(deleteTask(task.id))
             this.setState({
-              filter: 'all'
+              filter: 'active'
             })
           })
           .catch(err => console.log(err))
@@ -97,49 +97,3 @@ function mapStateToProps (globalState) {
 }
 
 export default connect(mapStateToProps)(TaskList)
-
-// chooseList = () => {
-//   const completedTasks = this.props.tasks.filter(task => task.isComplete)
-//   const uncompletedTasks = this.props.tasks.filter(task => !task.isComplete)
-//   const allTasks = this.props.tasks
-//   // eslint-disable-next-line no-unused-vars
-//   let displayList
-//   if (this.state.listState == 'all') {
-//     this.setState({ displayList: allTasks })
-//   } else if (this.state.listState == 'completed') {
-//     this.setState({ displayList: completedTasks })
-//   } else if (this.state.listState == 'active') {
-//     this.setState({ displayList: uncompletedTasks })
-//   }
-//   return this.state.displayList
-// }
-
-// Pass a callback into setState because
-// it DOES not update state instantaneously
-// The callback makes it wait to get the proper
-// displayList until AFTER setState is complete
-// filterClick = (newState) => {
-//   this.setState({
-//     listState: newState
-// Just chooseList without the ()
-// When the () is present, the results
-// of chooseList (an array of objects) is returned
-//   }, this.chooseList)
-// }
-
-{ /* <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Taste JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Create a TodoMVC template" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Rule the web" />
-        </li> */ }
