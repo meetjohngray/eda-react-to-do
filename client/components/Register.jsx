@@ -23,7 +23,6 @@ const Register = (props) => {
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
-          console.log("You're a user!")
         }
       })
   }
