@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
@@ -9,11 +10,11 @@ export default function Nav () {
     <>
       <div>
         <IfAuthenticated>
-          <a to='#' onClick={logOff}>Log off</a>
+          <Link to='#' onClick={logOff}>Log off</Link>
         </IfAuthenticated>
         <IfNotAuthenticated>
-          <a to='/register'>Register</a>
-          <a to='/signin'>Sign in</a>
+          <Link to='/register'>Register</Link>
+          <Link to='/signin'>Sign in</Link>
         </IfNotAuthenticated>
       </div>
     </>
