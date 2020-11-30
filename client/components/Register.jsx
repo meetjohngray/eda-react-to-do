@@ -25,6 +25,7 @@ const Register = (props) => {
           props.history.push('/')
         }
       })
+      .catch(err => console.log(err))
   }
 
   return (
