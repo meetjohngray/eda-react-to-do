@@ -21,7 +21,6 @@ function deleteToDo (id, db = connection) {
 }
 
 function updateToDo (id, updatedToDo, db = connection) {
-  console.log('updatedToDoDB')
   return db('todos').where('id', id)
     .update(
       {
