@@ -1,22 +1,18 @@
 import React from 'react'
 import Header from './Header'
-// import AddTodo from './AddTodo'
+import Nav from './Nav'
 import TaskList from './TaskList'
 import Footer from './Footer'
 
-class App extends React.Component {
-  componentDidMount() {
-  }
-
-  render() {
-    return (
-      <>
-        <Header />
-        <TaskList />
-        <Footer />
-      </>
-    )
-  }
+const App = () => {
+  return (
+    <>
+      <Nav />
+      <Header />
+      <TaskList />
+      <Footer />
+    </>
+  )
 }
 
 export default App

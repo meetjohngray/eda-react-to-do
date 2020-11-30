@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@testing-library/react": "^11.2.2",
+    "authenticare": "^0.4.7",
     "express": "^4.17.1",
     "knex": "^0.21.5",
     "mini-css-extract-plugin": "^0.10.0",

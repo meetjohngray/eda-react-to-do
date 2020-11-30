@@ -15,7 +15,8 @@ describe('<AddToDo />', () => {
     render(<Provider store={store}><AddToDo /></Provider>)
     const input = screen.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'new task' } })
-    fireEvent.keyDown(input)
-    expect(store.dispatch).toHaveBeenCalled()
+    if (fireEvent.keyDown(input) === 'enter') {
+      expect(store.dispatch).toHaveBeenCalled()
+    }
   })
 })
