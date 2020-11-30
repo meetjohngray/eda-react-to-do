@@ -42,3 +42,4 @@ function updateToDo ( id, updatedToDo, db = connection ) {
         isComplete: updatedToDo.isComplete
       })
 }
+module.exports = connection
