@@ -8,9 +8,7 @@ router.get('/', (req, res) => {
     .then(list => {
       res.json(list)
     })
-    .catch(
-      console.log('Nothing here.')
-    )
+    .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
