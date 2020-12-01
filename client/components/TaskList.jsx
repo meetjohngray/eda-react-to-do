@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ListItem from './ListItem'
 import { apiDeleteTask, getAllTasks } from '../apis/index'
 import { initTask, deleteTask } from '../actions/index'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 class TaskList extends React.Component {
   state = {
@@ -43,6 +44,7 @@ class TaskList extends React.Component {
   render () {
     return (
       <>
+      <IfAuthenticated>
         <section className="main">
           <input id="toggle-all" className="toggle-all" type="checkbox" />
           <label htmlFor="toggle-all">Mark all as complete</label>
@@ -87,7 +89,12 @@ class TaskList extends React.Component {
           {/* <!-- Hidden if no completed items are left ↓ --> */}
           {this.props.tasks.length > 0 ? <button className="clear-completed" onClick={this.handleClick}>Clear completed</button> : ''}
         </footer>
+      </IfAuthenticated>
+      <IfNotAuthenticated>
+        <h2>Cheers!</h2>
+      </IfNotAuthenticated>
       </>
+
     )
   }
 }
