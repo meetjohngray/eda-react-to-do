@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import ListItem from './ListItem'
 import { apiDeleteTask, getAllTasks } from '../apis/index'
 import { initTask, deleteTask } from '../actions/index'
-
 class TaskList extends React.Component {
   state = {
-    filter: 'all'
+    filter: 'all',
+    authenticated: false
   }
 
   componentDidMount () {
     getAllTasks()
+      // eslint-disable-next-line promise/always-return
       .then(task => {
         this.props.dispatch(initTask(task))
       })
@@ -22,6 +23,7 @@ class TaskList extends React.Component {
     this.props.tasks.forEach(task => {
       if (task.isComplete) {
         apiDeleteTask(task.id)
+          // eslint-disable-next-line promise/always-return
           .then(() => {
             this.props.dispatch(deleteTask(task.id))
             this.setState({
@@ -44,6 +46,7 @@ class TaskList extends React.Component {
     return (
       <>
         <section className="main">
+
           <input id="toggle-all" className="toggle-all" type="checkbox" />
           <label htmlFor="toggle-all">Mark all as complete</label>
           <ul className="todo-list">

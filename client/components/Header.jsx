@@ -1,6 +1,6 @@
 import React from 'react'
 import AddTodo from './AddTodo'
-import { IfAuthenticated } from './Authenticated'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 class Header extends React.Component {
   render () {
@@ -11,6 +11,8 @@ class Header extends React.Component {
           <IfAuthenticated>
             <AddTodo/>
           </IfAuthenticated>
+          <IfNotAuthenticated>
+          </IfNotAuthenticated>
         </header>
       </>
     )
