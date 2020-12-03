@@ -9,14 +9,16 @@ import { logOff } from 'authenticare/client'
 export default function Nav () {
   return (
     <>
-      <div>
-        <IfAuthenticated>
-          <Link to='#' onClick={logOff}>Log off</Link>
-        </IfAuthenticated>
-        <IfNotAuthenticated>
-          <Link to='/register'>Register</Link>
-          <Link to='/signin'>Sign in</Link>
-        </IfNotAuthenticated>
+      <div className="filters navbar">
+        <ul>
+          <IfAuthenticated>
+            <li><Link to='#' onClick={logOff}>Log off</Link></li>
+          </IfAuthenticated>
+          <IfNotAuthenticated>
+            <li><Link to='/register'>Register</Link></li>
+            <li><Link to='/signin'>Sign in</Link></li>
+          </IfNotAuthenticated>
+        </ul>
       </div>
 
       <Header />

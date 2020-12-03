@@ -8,9 +8,9 @@ import SignIn from './SignIn'
 const App = () => {
   return (
     <Router>
-      <Route path='/' component={Nav} />
       <Route exact path='/register' component={Register} />
       <Route path='/signin' component={SignIn} />
+      <Route exact path='/' component={Nav} />
     </Router>
   )
 }
