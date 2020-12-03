@@ -68,7 +68,7 @@ body {
 
 .header h1 {
   position: absolute;
-  top: -160px;
+  top: -165px;
   width: 100%;
   font-size: 80px;
   font-weight: 200;
@@ -90,9 +90,9 @@ body {
 }
 
 .navbar ul {
-  margin: 0;
-  padding: 0;
+  padding-inline-start: 0;
 }
+
 // .navbar:after {
 //   content: "";
 //   position: absolute;
