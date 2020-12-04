@@ -1,4 +1,4 @@
-// const path = require('path')
+const path = require('path')
 const express = require('express')
 
 const toDoRoutes = require('./routes/toDos')
@@ -11,5 +11,8 @@ server.use(express.static('public'))
 
 server.use('/api/v1', authRoutes)
 server.use('/v1/tasks', toDoRoutes)
+server.use('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
+})
 
 module.exports = server
