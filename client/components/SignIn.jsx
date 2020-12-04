@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { baseApiUrl as baseUrl } from '../config'
 import { isAuthenticated, signIn } from 'authenticare/client'
+import Header from './Header'
 
 const SignIn = (props) => {
   const [form, setForm] = useState({
@@ -45,6 +46,8 @@ const SignIn = (props) => {
 
         <button type='button' onClick={handleClick}>Sign in</button>
       </form>
+
+      <Header />
     </>
   )
 }

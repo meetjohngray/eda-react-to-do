@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { baseApiUrl as baseUrl } from '../config'
 import { isAuthenticated, register } from 'authenticare/client'
-
+import Header from './Header'
 const Register = (props) => {
   const [form, setForm] = useState({
     username: '',
@@ -47,6 +47,7 @@ const Register = (props) => {
           onChange={handleChange} />
         <button type='button' onClick={handleClick}>Register</button>
       </form>
+      <Header />
     </>
   )
 }

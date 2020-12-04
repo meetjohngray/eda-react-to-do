@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Header from './Header'
 import TaskList from './TaskList'
@@ -16,7 +16,7 @@ export default function Nav () {
           </IfAuthenticated>
           <IfNotAuthenticated>
             <li><Link to='/register'>Register</Link></li>
-            <li><Link to='/signin'>Sign in</Link></li>
+            <li><NavLink to='/signin'>Sign in</NavLink></li>
           </IfNotAuthenticated>
         </ul>
       </div>
