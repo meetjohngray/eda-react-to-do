@@ -3,6 +3,11 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import AddToDo from './AddTodo'
+import { addTask } from '../actions/index'
+
+jest.mock('../actions', () => ({
+  addTask: jest.fn()
+}))
 
 const store = {
   dispatch: jest.fn(),
@@ -17,6 +22,7 @@ describe('<AddToDo />', () => {
     fireEvent.change(input, { target: { value: 'new task' } })
     if (fireEvent.keyDown(input) === 'enter') {
       expect(store.dispatch).toHaveBeenCalled()
+      expect(addTask).toHaveBeenCalledWith('new task')
     }
   })
 })
