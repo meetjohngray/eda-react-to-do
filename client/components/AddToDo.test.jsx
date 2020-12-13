@@ -5,8 +5,9 @@ import { Provider } from 'react-redux'
 import AddToDo from './AddTodo'
 import { addTask } from '../actions/index'
 
-jest.mock('../actions', () => ({
-  addTask: jest.fn()
+const mockfakeAction = { type: 'fakeAction' }
+jest.mock('../actions/index', () => ({
+  addTask: jest.fn(() => mockfakeAction)
 }))
 
 const store = {
@@ -16,13 +17,20 @@ const store = {
 }
 
 describe('<AddToDo />', () => {
-  test('submitting an input dispatches addTask action', () => {
+  let input
+  beforeEach(() => {
     render(<Provider store={store}><AddToDo /></Provider>)
-    const input = screen.getByRole('textbox')
+    input = screen.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'new task' } })
+    fireEvent.submit(input)
+  })
+  test('submitting an input dispatches addTask action', () => {
     if (fireEvent.keyDown(input) === 'enter') {
-      expect(store.dispatch).toHaveBeenCalled()
+      expect(store.dispatch).toHaveBeenCalledWith(mockfakeAction)
       expect(addTask).toHaveBeenCalledWith('new task')
     }
+  })
+  test('submitting input returns the new task', () => {
+    expect(input.value).toBe('new task')
   })
 })

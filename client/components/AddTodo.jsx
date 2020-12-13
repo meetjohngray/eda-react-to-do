@@ -16,7 +16,7 @@ class AddTodo extends React.Component {
 
   handleSubmit = (event) => {
     // If the enter key is used, do the following
-    // event.preventDefault()
+    event.preventDefault()
     if (event.key == 'Enter') {
       // Add the task to the db
       apiAddTask(this.state)
@@ -40,9 +40,16 @@ class AddTodo extends React.Component {
 
   render () {
     return (
-      <>
-        <input className="new-todo" placeholder="What needs to be done?" autoFocus={true} value={this.state.task} onChange={this.handleChange} onKeyDown={this.handleSubmit}/>
-      </>
+      <form onSubmit={this.handleSubmit}>
+        <input
+          className="new-todo"
+          placeholder="What needs to be done?"
+          autoFocus={true}
+          value={this.state.task}
+          onChange={this.handleChange}
+          // onKeyDown={this.handleSubmit}
+        />
+      </form>
     )
   }
 }
