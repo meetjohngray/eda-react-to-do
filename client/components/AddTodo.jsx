@@ -15,27 +15,26 @@ class AddTodo extends React.Component {
   }
 
   handleSubmit = (event) => {
-    // If the enter key is used, do the following
     event.preventDefault()
-    if (event.key == 'Enter') {
-      // Add the task to the db
-      apiAddTask(this.state)
-        // We need the id so that after we add the task, the edit task form doesn't fire
-        .then((id) => {
-          //  We turn our info into an object...
-          const taskObj = {
-            task: this.state.task,
-            id: id
-          }
-          // And give this object to our action to change the current state to reflect the changes
-          this.props.dispatch(addTask(taskObj))
-          // Reset the form to an empty string
-          this.setState({ task: ''})
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
+    // Add the task to the db
+    apiAddTask(this.state)
+    // We need the id so that after we add the task, the edit task form doesn't fire
+      .then((id) => {
+        //  We turn our info into an object...
+        const taskObj = {
+          task: this.state.task,
+          id: id
+        }
+        // And give this object to our action to change the current state to reflect the changes
+        this.props.dispatch(addTask(taskObj))
+        // Reset the form to an empty string
+        this.setState({ task: '' })
+
+        return null
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render () {

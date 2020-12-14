@@ -1,5 +1,4 @@
 import request from 'superagent'
-import { getAuthorizationHeader } from 'authenticare/client'
 
 export function getAllTasks () {
   return request

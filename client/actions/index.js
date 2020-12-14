@@ -1,4 +1,3 @@
-
 export const INIT_TASK = 'INIT_TASK'
 export const ADD_TASK = 'ADD_TASK'
 export const DEL_TASK = 'DEL_TASK'
@@ -24,9 +23,10 @@ export function deleteTask (task) {
   }
 }
 
-export function updateTask (id, task ) {
+export function updateTask (id, task) {
   return {
     type: UPDATE_TASK,
-    task, id
+    task,
+    id
   }
 }
