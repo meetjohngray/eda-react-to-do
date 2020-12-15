@@ -29,7 +29,6 @@ class AddTodo extends React.Component {
         this.props.dispatch(addTask(taskObj))
         // Reset the form to an empty string
         this.setState({ task: '' })
-
         return null
       })
       .catch(err => {
