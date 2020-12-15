@@ -20,16 +20,15 @@ describe('getAllTasks', () => {
 
 describe('apiAddTask', () => {
   const fakeTodo = ['this is your todo']
-  const fakeResponse = 3
+  const fakeResponse = { id: 3, task: fakeTodo }
   const scope = nock('http://localhost')
     .post('/v1/tasks', fakeTodo)
     .reply(201, fakeResponse)
-   
-  test('returns body of response', () => {
+
+  test('returns id of the new todo', () => {
     return apiAddTask(fakeTodo)
       .then((response) => {
-        // console.log(response)
-        // expect(response).toEqual(fakeResponse)
+        expect(response).toEqual(3)
         expect(scope.isDone()).toBe(true)
         return null
       })
