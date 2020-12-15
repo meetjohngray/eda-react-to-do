@@ -1,27 +1,29 @@
 import request from 'superagent'
 
+const apiBase = '/v1/tasks'
+
 export function getAllTasks () {
   return request
-    .get('/v1/tasks')
+    .get(apiBase)
     .then(response => response.body)
 }
 
 export function apiAddTask (task) {
   return request
-    .post('/v1/tasks')
+    .post(apiBase)
     .send(task)
     .then(response => response.body.id)
 }
 
 export function apiDeleteTask (id) {
   return request
-    .delete('/v1/tasks/' + id)
+    .delete(`${apiBase}/${id}`)
     .then(response => response.body)
 }
 
 export function apiUpdateTask (id, task) {
   return request
-    .patch('/v1/tasks/' + id)
+    .patch(`${apiBase}/${id}`)
     .send(task)
     .then(response => response.body.id)
 }
