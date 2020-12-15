@@ -30,7 +30,7 @@ const store = {
 describe('<AddToDo />', () => {
   // What happens before each test runs
   let input
-  beforeEach(() => {
+  beforeAll(() => {
     render(<Provider store={store}><AddToDo /></Provider>)
     input = screen.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'new task' } })
