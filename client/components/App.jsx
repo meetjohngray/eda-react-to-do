@@ -12,6 +12,7 @@ const App = () => {
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />
         <Route exact path='/' component={Nav} />
+        <Route render={() => <h1>You've Come to the Wrong Place </h1>}/>
       </Switch>
     </Router>
   )
