@@ -3,18 +3,15 @@ import { getAllTasks, apiAddTask } from './index'
 
 describe('getAllTasks', () => {
   const fakeBody = ['I am a todo']
-  const scope = nock('http://localhost')
-    .get('/v1/tasks')
-    .reply(200, fakeBody)
+  const scope = nock('http://localhost').get('/v1/tasks').reply(200, fakeBody)
 
   test('returns body of response', () => {
-    return getAllTasks()
-      .then((tasks) => {
-        expect(tasks).toEqual(fakeBody)
-        // Did I hit the api?
-        expect(scope.isDone()).toBe(true)
-        return null
-      })
+    return getAllTasks().then((tasks) => {
+      expect(tasks).toEqual(fakeBody)
+      // Did I hit the api?
+      expect(scope.isDone()).toBe(true)
+      return null
+    })
   })
 })
 
@@ -26,11 +23,10 @@ describe('apiAddTask', () => {
     .reply(201, fakeResponse)
 
   test('returns id of the new todo', () => {
-    return apiAddTask(fakeTodo)
-      .then((response) => {
-        expect(response).toEqual(3)
-        expect(scope.isDone()).toBe(true)
-        return null
-      })
+    return apiAddTask(fakeTodo).then((response) => {
+      expect(response).toEqual(3)
+      expect(scope.isDone()).toBe(true)
+      return null
+    })
   })
 })
