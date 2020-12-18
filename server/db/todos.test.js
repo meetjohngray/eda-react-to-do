@@ -24,9 +24,21 @@ describe('getToDos', () => {
   })
   test('returns todos', () => {
     expect.assertions(1)
-    return promise.then(res => {
+    return promise.expect(200).then(res => {
       expect(res.body).toEqual(fakeToDos)
       return null
+    })
+  })
+  describe('when database does not work', () => {
+    test('returns 500', () => {
+      expect.assertions(1)
+      const err = new Error('horrible things')
+      getToDos.mockImplementation(() => Promise.reject(err))
+      return request(server).get('/v1/tasks')
+        .then(res => {
+          expect(res.status).toBe(500)
+          return null
+        })
     })
   })
 })

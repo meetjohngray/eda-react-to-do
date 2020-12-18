@@ -9,7 +9,9 @@ router.get('/', (req, res) => {
       res.json(list)
       return null
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      res.status(500).send(err.message)
+    })
 })
 
 router.post('/', (req, res) => {
@@ -31,12 +33,13 @@ router.delete('/:id', (req, res) => {
   const id = Number(req.params.id)
   // console.log(id)
   db.deleteToDo(id)
-  .then(taskDeleted => {
-    res.json(taskDeleted)
-  })
-  // .catch(err => {
-  //   res.send(err.message)
-  // })
+    .then(taskDeleted => {
+      res.json(taskDeleted)
+      return null
+    })
+    .catch(err => {
+      res.status(500).send(err.message)
+    })
 })
 
 router.patch('/:id', (req, res) => {
@@ -46,12 +49,15 @@ router.patch('/:id', (req, res) => {
     ...req.body
   }
   db.updateToDo(id, updatedToDo)
-    //this returns the number of items changed 
-  .then(itemsChanged => {
+    // this returns the number of items changed
+    .then(itemsChanged => {
     //  console.log('DB toDos.js line 49', updatedTask)
       res.json(itemsChanged)
+      return null
     })
-  // res.sendStatus(204)
+    .catch(err => {
+      res.status(500).send(err.message)
+    })
 })
 
 module.exports = router
