@@ -16,6 +16,12 @@ describe('getToDos', () => {
     promise = request(server)
       .get('/v1/tasks')
   })
+  test('call db.getToDos', () => {
+    return promise.then(() => {
+      expect(getToDos).toHaveBeenCalled()
+      return null
+    })
+  })
   test('returns todos', () => {
     expect.assertions(1)
     return promise.then(res => {
