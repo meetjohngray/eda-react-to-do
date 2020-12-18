@@ -1,12 +1,29 @@
 import request from 'supertest'
 import server from '../server'
-import { addToDo, deleteToDo, updateTodo } from './todos'
+import { addToDo, deleteToDo, updateTodo, getToDos } from './todos'
 
 jest.mock('./todos', () => ({
   addToDo: jest.fn(),
   deleteToDo: jest.fn(),
-  updateToDo: jest.fn()
+  updateToDo: jest.fn(),
+  getToDos: jest.fn()
 }))
+
+describe('getToDos', () => {
+  const fakeToDos = [{ task: 'thing' }, { task: 'another thing' }]
+  beforeAll(() => {
+    getToDos.mockImplementation(() => Promise.resolve(fakeToDos))
+    promise = request(server)
+      .get('/v1/tasks')
+  })
+  test('returns todos', () => {
+    expect.assertions(1)
+    return promise.then(res => {
+      expect(res.body).toEqual(fakeToDos)
+      return null
+    })
+  })
+})
 
 let promise
 describe('POST /v1/tasks', () => {
@@ -21,7 +38,7 @@ describe('POST /v1/tasks', () => {
     addToDo.mockImplementation(() => Promise.resolve(fakeToDo))
     promise = request(server)
       .post('/v1/tasks')
-      .send({task: 'new task'})
+      .send({ task: 'new task' })
   })
   test('returns a 201', () => {
     expect.assertions(1)
