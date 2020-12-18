@@ -84,6 +84,17 @@ describe('DELETE /v1/tasks/:id', () => {
     const promises = badIds.map(id => expectDeleteStatusForId(id, 400))
     return Promise.all(promises)
   })
+  test('return 200 if delete happens', () => {
+    deleteToDo.mockImplementation(() => Promise.resolve())
+    expect.assertions(1)
+    return expectDeleteStatusForId(23, 200)
+  })
+  test('returns 500 if delete does not succeed', () => {
+    const err = new Error('reasons')
+    deleteToDo.mockImplementation(() => Promise.reject(err))
+    expect.assertions(1)
+    return expectDeleteStatusForId(23, 500)
+  })
 })
 
 async function expectDeleteStatusForId (id, status) {
