@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = Number(req.params.id)
-  // console.log(id)
+  // Make sure the id is valid
+  if (id < 1 || isNaN(id)) return res.sendStatus(400)
   db.deleteToDo(id)
     .then(taskDeleted => {
       res.json(taskDeleted)

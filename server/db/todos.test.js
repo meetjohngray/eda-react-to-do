@@ -76,3 +76,21 @@ describe('POST /v1/tasks', () => {
     })
   })
 })
+
+describe('DELETE /v1/tasks/:id', () => {
+  test('returns 400 error if id not good', () => {
+    expect.assertions(3)
+    const badIds = ['0', '-23', 'apple']
+    const promises = badIds.map(id => expectDeleteStatusForId(id, 400))
+    return Promise.all(promises)
+  })
+})
+
+function expectDeleteStatusForId (id, status) {
+  return request(server)
+    .delete('/v1/tasks/' + id)
+    .then((res) => {
+      expect(res.status).toBe(status)
+      return null
+    })
+}
