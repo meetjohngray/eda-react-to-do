@@ -24,6 +24,7 @@ const SignIn = (props) => {
         if (isAuthenticated()) {
           props.history.push('/')
         }
+        return null
       })
       .catch(err => console.log(err))
   }

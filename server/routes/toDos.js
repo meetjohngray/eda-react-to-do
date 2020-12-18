@@ -7,16 +7,20 @@ router.get('/', (req, res) => {
   db.getToDos()
     .then(list => {
       res.json(list)
+      return null
     })
     .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
   const newTask = req.body
+  // console.log('toDos.js 17', newTask)
   db.addToDo(newTask)
     .then((ids) => {
       newTask.id = ids[0]
-      res.json(newTask)
+      // console.log('toDos.js 21', newTask)
+      res.status(201).json(newTask)
+      return null
     })
     .catch(err => {
       res.status(500).send(err.message)
