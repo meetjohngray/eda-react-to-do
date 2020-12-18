@@ -86,11 +86,9 @@ describe('DELETE /v1/tasks/:id', () => {
   })
 })
 
-function expectDeleteStatusForId (id, status) {
-  return request(server)
+async function expectDeleteStatusForId (id, status) {
+  const res = await request(server)
     .delete('/v1/tasks/' + id)
-    .then((res) => {
-      expect(res.status).toBe(status)
-      return null
-    })
+  expect(res.status).toBe(status)
+  return null
 }
