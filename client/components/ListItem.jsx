@@ -13,6 +13,7 @@ class ListItem extends React.Component {
     apiDeleteTask(id)
       .then(() => {
         this.props.dispatch(deleteTask(id))
+        return null
       })
       .catch(err => console.log(err))
   }
