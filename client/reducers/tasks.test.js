@@ -15,11 +15,11 @@ describe('tasks reducer', () => {
     const state = tasksReducer(undefined, action)
     expect(state).toEqual(task)
   })
-  
+
   test('ADD_TASK', () => {
-    const task = ['A new thing']
+    const task = 'A new thing'
     const action = { type: ADD_TASK, task }
-    const state = tasksReducer(undefined, action)
-    expect(state).toEqual(task)
+    const state = tasksReducer(['a task', 'another task'], action)
+    expect(state).toHaveLength(3)
   })
 })
