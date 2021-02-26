@@ -18,7 +18,7 @@ class ListItem extends React.Component {
       .catch(err => console.log(err))
   }
 
-  doubleClick = ( id, event) => {
+  doubleClick = (id, event) => {
     this.setState({
       edit_Task: id
     })
@@ -35,8 +35,9 @@ class ListItem extends React.Component {
       // then set task.task as the submitted value and dispatch this to global state
         .then(() => {
           task.task = value
-          this.props.dispatch(updateTask(task.id, task))
+          this.props.dispatch(updateTask(task))
           this.setState({ edit_Task: null })
+          return null
         })
         .catch(err => console.log(err))
     }
@@ -48,6 +49,7 @@ class ListItem extends React.Component {
       .then(() => {
         this.props.dispatch(updateTask(id, task))
         this.setState({ edit_Task: null })
+        return null
       })
       .catch(err => console.log(err))
   }

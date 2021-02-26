@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
       return [...state, action.task]
 
     case DEL_TASK:
-      return state.filter((task) => task.id !== action.task)
+      return state.filter((task) => task.id !== action.id)
 
       // A reducer will return anything you want it to
       // case 'Bananas':
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_TASK:
       return state.map((task) => {
         if (task.id === action.id) {
-          task.task = action.task.task
+          task.task = action.task
           task.isComplete = action.task.isComplete
         }
         return task

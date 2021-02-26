@@ -16,17 +16,16 @@ export function addTask (task) {
   }
 }
 
-export function deleteTask (task) {
+export function deleteTask (id) {
   return {
     type: DEL_TASK,
-    task
+    id
   }
 }
 
-export function updateTask (id, task) {
+export function updateTask (task) {
   return {
     type: UPDATE_TASK,
-    task,
-    id
+    task
   }
 }

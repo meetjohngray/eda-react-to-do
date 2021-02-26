@@ -17,13 +17,11 @@ describe('actions', () => {
   })
 
   test('should create an action to update a task', () => {
-    const id = 1
-    const task = 'Update a test'
+    const task = { id: 1, task: 'Update a test' }
     const expectedAction = {
       type: UPDATE_TASK,
-      id,
       task
     }
-    expect(updateTask(id, task)).toEqual(expectedAction)
+    expect(updateTask(task)).toEqual(expectedAction)
   })
 })
