@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { getAllTasks, apiAddTask } from './index'
+import { getAllTasks, apiAddTask, apiDeleteTask } from './index'
 
 describe('getAllTasks', () => {
   const fakeBody = ['I am a todo']
@@ -28,5 +28,20 @@ describe('apiAddTask', () => {
       expect(scope.isDone()).toBe(true)
       return null
     })
+  })
+})
+
+describe('apiDeleteTask', () => {
+  test('sends delete request to api', () => {
+    const scope = nock('http://localhost')
+      .delete('/v1/tasks/3')
+      .reply(200, {})
+    expect.assertions(1)
+    return apiDeleteTask(3)
+      .then(() => {
+        expect(scope.isDone()).toBe(true)
+        return null
+      })
+      .catch(console.log)
   })
 })
