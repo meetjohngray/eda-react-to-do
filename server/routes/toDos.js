@@ -52,7 +52,7 @@ router.patch('/:id', (req, res) => {
   db.updateToDo(id, updatedToDo)
     // this returns the number of items changed
     .then(itemsChanged => {
-    //  console.log('DB toDos.js line 49', updatedTask)
+      console.log('DB toDos.js line 49', itemsChanged)
       res.json(itemsChanged)
       return null
     })

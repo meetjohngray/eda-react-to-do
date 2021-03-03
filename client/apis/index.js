@@ -25,5 +25,5 @@ export function apiUpdateTask (id, task) {
   return request
     .patch(`${apiBase}/${id}`)
     .send(task)
-    .then(response => response.body.id)
+    .then(response => response.body)
 }
