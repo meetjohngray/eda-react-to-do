@@ -32,10 +32,11 @@ describe('apiAddTask', () => {
 })
 
 describe('apiDeleteTask', () => {
+  const scope = nock('http://localhost')
+    .delete('/v1/tasks/3')
+    .reply(200, {})
+
   test('sends delete request to api', () => {
-    const scope = nock('http://localhost')
-      .delete('/v1/tasks/3')
-      .reply(200, {})
     expect.assertions(1)
     return apiDeleteTask(3)
       .then(() => {
