@@ -6,7 +6,7 @@ import TaskList from './TaskList'
 import Footer from './Footer'
 import { logOff } from 'authenticare/client'
 
-export default function Nav () {
+const Nav = () => {
   return (
     <>
       <div className="filters navbar">
@@ -29,3 +29,5 @@ export default function Nav () {
     </>
   )
 }
+
+export default Nav
