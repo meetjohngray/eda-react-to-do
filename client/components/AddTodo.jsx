@@ -4,11 +4,6 @@ import { apiAddTask } from '../apis/index'
 import { addTask } from '../actions/index'
 
 const AddTodo = (props) => {
-  // Set the initial state of task
-  // state = {
-  //   task: ''
-  // }
-
   const [task, setTask] = useState('')
 
   const handleChange = (event) => {
@@ -45,7 +40,6 @@ const AddTodo = (props) => {
         autoFocus={true}
         value={task}
         onChange={handleChange}
-        // onKeyDown={this.handleSubmit}
       />
     </form>
   )
