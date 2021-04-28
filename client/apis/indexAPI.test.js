@@ -44,7 +44,9 @@ describe('apiDeleteTask', () => {
         expect(scope.isDone()).toBe(true)
         return null
       })
-      .catch(console.log)
+      .catch(err => {
+        console.log(err)
+      })
   })
 })
 

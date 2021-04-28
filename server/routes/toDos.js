@@ -16,11 +16,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newTask = req.body
-  // console.log('toDos.js 17', newTask)
   db.addToDo(newTask)
     .then((ids) => {
       newTask.id = ids[0]
-      // console.log('toDos.js 21', newTask)
       res.status(201).json(newTask)
       return null
     })
@@ -52,7 +50,6 @@ router.patch('/:id', (req, res) => {
   db.updateToDo(id, updatedToDo)
     // this returns the number of items changed
     .then(itemsChanged => {
-      console.log('DB toDos.js line 49', itemsChanged)
       res.json(itemsChanged)
       return null
     })

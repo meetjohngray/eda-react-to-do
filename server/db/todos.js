@@ -5,7 +5,6 @@ function getToDos (db = connection) {
 }
 
 function addToDo (newTask, db = connection) {
-  // console.log('db todos.js 8', newTask)
   return db('todos')
     .insert(
       {

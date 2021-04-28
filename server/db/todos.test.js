@@ -69,7 +69,6 @@ describe('POST /v1/tasks', () => {
   test('calls addToDo from database', () => {
     expect.assertions(1)
     return promise.then(res => {
-      // console.log(res.body)
       expect(addToDo).toHaveBeenCalled()
       // ## How to get the below working?
       // expect(addToDo).toHaveBeenCalledWith('new task')
