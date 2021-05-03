@@ -11,6 +11,7 @@ beforeAll(() => {
 beforeEach(() => {
   return testDb.seed.run()
 })
+
 describe('Get to todos', () => {
   test('Get todos from db', () => {
     expect.assertions(2)
@@ -18,6 +19,21 @@ describe('Get to todos', () => {
       .then(tasks => {
         expect(tasks).toHaveLength(3)
         expect(tasks[0].task).toEqual('laundry')
+        return null
+      })
+  })
+})
+
+describe('addTodo', () => {
+  test('saves todo into database', () => {
+    expect.assertions(2)
+    const task = { task: 'new task' }
+    return db.addToDo(task, testDb)
+      .then(() => {
+        return testDb('toDos').select()
+      }).then(todos => {
+        expect(todos).toHaveLength(4)
+        expect(todos[3].task).toEqual('new task')
         return null
       })
   })
