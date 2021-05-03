@@ -1,5 +1,4 @@
 import nock from 'nock'
-import { updateTask } from '../actions'
 import { getAllTasks, apiAddTask, apiDeleteTask, apiUpdateTask } from './index'
 
 describe('getAllTasks', () => {
