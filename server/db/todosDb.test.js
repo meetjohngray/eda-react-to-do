@@ -12,13 +12,13 @@ beforeEach(() => {
   return testDb.seed.run()
 })
 
-describe('Get to todos', () => {
+describe('Get todos', () => {
   test('Get todos from db', () => {
     expect.assertions(2)
     return db.getToDos(testDb)
-      .then(tasks => {
-        expect(tasks).toHaveLength(3)
-        expect(tasks[0].task).toEqual('laundry')
+      .then(todos => {
+        expect(todos).toHaveLength(3)
+        expect(todos[0].task).toEqual('laundry')
         return null
       })
   })
@@ -34,6 +34,19 @@ describe('addTodo', () => {
       }).then(todos => {
         expect(todos).toHaveLength(4)
         expect(todos[3].task).toEqual('new task')
+        return null
+      })
+  })
+})
+
+describe('delete todos', () => {
+  test('deletes todos from database', () => {
+    expect.assertions(2)
+    return db.deleteToDo(1, testDb)
+      .then(() => db.getToDos(testDb))
+      .then(todos => {
+        expect(todos).toHaveLength(2)
+        expect(todos.map(todo => todo.id)).toEqual([2, 3])
         return null
       })
   })
