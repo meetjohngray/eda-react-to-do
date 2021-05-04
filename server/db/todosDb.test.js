@@ -51,3 +51,29 @@ describe('delete todos', () => {
       })
   })
 })
+
+describe('update todo in DB', () => {
+  const id = 1
+  const newTodo = { task: 'write tests' }
+
+  test('updates a todo', async () => {
+    expect.assertions(1)
+    await db.updateToDo(id, newTodo, testDb)
+    const todos = await db.getToDos(testDb)
+    expect(todos.map(todo => todo.task)).toContain('write tests')
+    return null
+  })
+
+  test('returns updated todo', async () => {
+    expect.assertions(1)
+    const oldToDo = await db.getToDos(testDb)
+      .then(todos => todos.find(item => item.id === 1))
+    return db.updateToDo(oldToDo.id, { task: 'new todo' }, testDb)
+      .then(async () => {
+        const newToDos = await db.getToDos(testDb)
+        console.log(newToDos)
+        expect(newToDos.map(todo => todo.task)).toContain('new todo')
+        return null
+      })
+  })
+})
