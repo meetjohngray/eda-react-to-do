@@ -71,7 +71,6 @@ describe('update todo in DB', () => {
     return db.updateToDo(oldToDo.id, { task: 'new todo' }, testDb)
       .then(async () => {
         const newToDos = await db.getToDos(testDb)
-        console.log(newToDos)
         expect(newToDos.map(todo => todo.task)).toContain('new todo')
         return null
       })
