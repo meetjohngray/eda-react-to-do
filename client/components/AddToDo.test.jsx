@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import AddToDo from './AddTodo'
 import { addTask } from '../actions/index'
@@ -30,12 +30,16 @@ const store = {
 describe('<AddToDo />', () => {
   // What happens before each test runs
   let input
-  beforeAll(() => {
+  beforeAll(async () => {
     render(<Provider store={store}><AddToDo /></Provider>)
     input = screen.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'new task' } })
     fireEvent.submit(input)
+    await waitFor(() => {
+      return apiAddTask.mock.calls.length > 1
+    })
   })
+
   test('call the apiAddTask method', async () => {
     const data = await apiAddTask('new task')
     expect(response.statusCode).toBe(200)

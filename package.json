@@ -9,7 +9,7 @@
     "watch:client": "webpack --watch",
     "watch:server": "nodemon --watch server",
     "start": "node server",
-    "test": "jest --noStackTrace --watchAll",
+    "test": "jest --noStackTrace --watchAll --coverage",
     "build": "webpack",
     "knex": "knex --knexfile ./server/db/knexfile.js",
     "lint": "eslint --ext .js,.jsx ."
