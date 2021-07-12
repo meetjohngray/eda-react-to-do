@@ -5,30 +5,16 @@ import { apiDeleteTask, getAllTasks } from '../apis/index'
 import { initTask, deleteTask } from '../actions/index'
 
 const TaskList = (props) => {
-  // state = {
-  //   filter: 'all',
-  //   authenticated: false
-  // }
-
   const [TaskList, setTaskList] = useState({
     filter: 'all',
     authenticated: false
   })
 
-  // componentDidMount () {
-  //   getAllTasks()
-  //     // eslint-disable-next-line promise/always-return
-  //     .then(task => {
-  //       this.props.dispatch(initTask(task))
-  //     })
-  //     .catch(err => console.log(err))
-  // }
-
   useEffect(() => {
     getAllTasks()
-    // eslint-disable-next-line promise/always-return
       .then(task => {
         props.dispatch(initTask(task))
+        return null
       })
       .catch(err => console.log(err))
   }, [])
@@ -38,12 +24,12 @@ const TaskList = (props) => {
     props.tasks.forEach(task => {
       if (task.isComplete) {
         apiDeleteTask(task.id)
-          // eslint-disable-next-line promise/always-return
           .then(() => {
             props.dispatch(deleteTask(task.id))
             setTaskList({
               ...TaskList, filter: 'active'
             })
+            return null
           })
           .catch(err => console.log(err))
       }

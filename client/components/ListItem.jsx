@@ -1,30 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { apiDeleteTask, apiUpdateTask } from '../apis/index'
 import { deleteTask, updateTask } from '../actions/index'
 
-class ListItem extends React.Component {
-  state = {
-    edit_Task: null // Use null when using numbers
-  }
+function ListItem (props) {
+  // state = {
+  //   edit_Task: null // Use null when using numbers
+  // }
+  const [editTask, setEditTask] = useState(null)
 
-  handleClick = (id) => {
+  const handleClick = (id) => {
     apiDeleteTask(id)
       .then(() => {
-        this.props.dispatch(deleteTask(id))
+        props.dispatch(deleteTask(id))
         return null
       })
       .catch(err => console.log(err))
   }
 
-  doubleClick = (id, event) => {
-    this.setState({
-      edit_Task: id
-    })
+  const doubleClick = (id) => {
+    setEditTask(id)
   }
 
-  handleSubmit = (task, event) => {
+  const handleSubmit = (task, event) => {
     // Create this variable to update the name of the todo based on what is typed in the field
     const value = event.target.value
     // If the enter key is hit,
@@ -35,81 +34,58 @@ class ListItem extends React.Component {
       // then set task.task as the submitted value and dispatch this to global state
         .then(() => {
           task.task = value
-          this.props.dispatch(updateTask(task))
-          this.setState({ edit_Task: null })
+          props.dispatch(updateTask(task))
+          setEditTask({ editTask: null })
           return null
         })
         .catch(err => console.log(err))
     }
   }
 
-  toggleDone = (id, task, event) => {
+  const toggleDone = (id, task, event) => {
     task.isComplete = event.target.checked
     apiUpdateTask(id, task)
       .then(() => {
-        this.props.dispatch(updateTask(id, task))
-        this.setState({ edit_Task: null })
+        props.dispatch(updateTask(id, task))
+        setEditTask({ editTask: null })
         return null
       })
       .catch(err => console.log(err))
   }
 
-  liClass = () => {
-    if (this.props.task.isComplete) {
+  const liClass = () => {
+    if (props.task.isComplete) {
       return 'completed'
-    } else if (this.state.edit_Task) {
+    } else if (editTask) {
       return 'editing'
     } else {
       return ''
     }
   }
 
-  render() {
-    return (
-      <li key={this.props.task.id}
-        // className={this.props.task.isComplete ? 'completed' : '' }
-        className={this.liClass()}
-      >
-        <div className="view">
-          {/* <input class="toggle" type="checkbox" checked /> */}
-          <input className="toggle" type="checkbox"
-            onChange={(event) => this.toggleDone(this.props.task.id, this.props.task, event)}
-            defaultChecked={this.props.task.isComplete}
-          />
-          <label onDoubleClick={() => this.doubleClick(this.props.task.id)}>
-            {(this.state.edit_Task == this.props.task.id) ?
-              <input type="text" className="edit-todo" defaultValue = {this.props.task.task}
-                onKeyDown={(event) => this.handleSubmit(this.props.task, event)}
-              />
-              : this.props.task.task}
-          </label>
-          {/* <p>{task.details}</p> */}
-          {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
-          <button className="destroy"
-            onClick={() => this.handleClick(this.props.task.id)}>
-          </button>
-        </div>
-      </li>
-    )
-  }
+  return (
+    <li key={props.task.id} className={ liClass() }>
+      <div className="view">
+        {/* <input class="toggle" type="checkbox" checked /> */}
+        <input className="toggle" type="checkbox"
+          onChange={(event) => toggleDone(props.task.id, props.task, event)}
+          defaultChecked={props.task.isComplete}
+        />
+        <label onDoubleClick={() => doubleClick(props.task.id)}>
+          {(editTask === props.task.id)
+            ? <input type="text" className="edit-todo" defaultValue = {props.task.task}
+              onKeyDown={(event) => handleSubmit(props.task, event)}
+            />
+            : props.task.task}
+        </label>
+        {/* <p>{task.details}</p> */}
+        {/* onClick uses an anonymous function so that we can pass it a parameter. If we didn't do this, it would call handleClick immediately and cause problems */}
+        <button className="destroy"
+          onClick={() => handleClick(props.task.id)}>
+        </button>
+      </div>
+    </li>
+  )
 }
 
 export default connect()(ListItem)
-
-
-{/* <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Taste JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Create a TodoMVC template" />
-        </li>
-        <li>
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Buy a unicorn</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Rule the web" />
-        </li> */}
