@@ -5,9 +5,6 @@ import { apiDeleteTask, apiUpdateTask } from '../apis/index'
 import { deleteTask, updateTask } from '../actions/index'
 
 function ListItem (props) {
-  // state = {
-  //   edit_Task: null // Use null when using numbers
-  // }
   const [editTask, setEditTask] = useState(null)
 
   const handleClick = (id) => {
