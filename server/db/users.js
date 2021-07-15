@@ -12,8 +12,9 @@ function createUser (user, db = connection) {
   return userExists(username, db)
     .then(exists => {
       if (exists) {
-        return Promise.reject(new Error('User exists'))
+        return (new Error('User exists'))
       }
+      return null
     })
     .then(() => generateHash(password))
     .then(passwordHash => {
