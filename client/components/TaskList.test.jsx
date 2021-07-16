@@ -42,5 +42,6 @@ describe('<TaskList />', () => {
     render(<Provider store={fakeStore}><TaskList /></Provider>)
     const items = await screen.findAllByRole('listitem')
     expect(items).toHaveLength(6)
+    expect(items).toHaveLength(6)
   })
 })
